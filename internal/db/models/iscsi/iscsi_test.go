@@ -26,7 +26,7 @@ func TestGlobalSettingsAsUcl(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			rendered := tt.gs.AsUcl(0)
 			if rendered != tt.expected {
-				t.Errorf("got\n------\n%s\n------\nexpected:\n------\n%s\n------\n", rendered, tt.expected)
+				t.Errorf("\n------got------\n%s\n------expected------\n%s\n------\n", rendered, tt.expected)
 			}
 		})
 	}

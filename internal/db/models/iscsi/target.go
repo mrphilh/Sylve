@@ -31,10 +31,7 @@ func (t *Target) AsUcl(indent int) string {
 	builder.WriteString(fmt.Sprintf("%s\tportal-group = %s\n", tabs, t.PortalGroup.Name))
 	builder.WriteString(fmt.Sprintf("%s\tlun = {\n", tabs))
 	for i := 0; i < len(t.Luns); i++ {
-		builder.WriteString(fmt.Sprintf("%s\t\t%d {\n", tabs, i))
-		builder.WriteString(fmt.Sprintf("%s\t\t\tpath = %s\n", tabs, t.Luns[i].Path))
-		builder.WriteString(fmt.Sprintf("%s\t\t\tsize = %s\n", tabs, t.Luns[i].Size))
-		builder.WriteString(fmt.Sprintf("%s\t\t}\n", tabs))
+		builder.WriteString(fmt.Sprintf("%s\t\t%d = %s\n", tabs, i, t.Luns[i].Name))
 	}
 	builder.WriteString(fmt.Sprintf("%s\t}\n", tabs))
 	builder.WriteString(fmt.Sprintf("%s}\n", tabs))
