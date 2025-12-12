@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestLunAsUcl(t *testing.T) {
+func Test_lunAsUcl(t *testing.T) {
 	var tests = []struct {
 		name     string
 		l        *Lun
