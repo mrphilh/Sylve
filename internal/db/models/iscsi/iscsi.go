@@ -7,7 +7,7 @@ import (
 
 type GlobalSetting struct {
 	ID    int `gorm:"primaryKey"`
-	Debug int `gorm:"default:'1'"`
+	Debug int `gorm:"default:1"`
 }
 
 func (gs *GlobalSetting) AsUcl(indent int) string {
