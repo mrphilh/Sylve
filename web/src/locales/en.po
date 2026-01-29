@@ -3192,6 +3192,10 @@ msgstr "Metadata"
 msgid "Cloud Init Metadata"
 msgstr "Cloud Init Metadata"
 
+#: src/lib/components/custom/VM/Options/CloudInit.svelte
+msgid "Cloud Init Network Config"
+msgstr "Cloud Init Network Config"
+
 #: src/lib/components/custom/VM/Options/Serial.svelte
 msgid "Failed to modify serial console"
 msgstr "Failed to modify serial console"

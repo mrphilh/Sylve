@@ -16,7 +16,8 @@
 	let { open = $bindable(), vm, reload = $bindable(false) }: Props = $props();
 	let cloudInit = $state({
 		data: vm.cloudInitData ?? '',
-		metadata: vm.cloudInitMetaData ?? ''
+		metadata: vm.cloudInitMetaData ?? '',
+		networkConfig: vm.cloudInitNetworkConfig ?? ''
 	});
 
 	async function modify() {
@@ -30,7 +31,12 @@
 			return;
 		}
 
-		const response = await modifyCloudInitData(vm.rid, cloudInit.data, cloudInit.metadata);
+		const response = await modifyCloudInitData(
+			vm.rid,
+			cloudInit.data,
+			cloudInit.metadata,
+			cloudInit.networkConfig
+		);
 		if (response.error) {
 			handleAPIError(response);
 			toast.error('Failed to modify Cloud Init data', {
@@ -67,6 +73,7 @@
 						onclick={() => {
 							cloudInit.data = vm.cloudInitData ?? '';
 							cloudInit.metadata = vm.cloudInitMetaData ?? '';
+							cloudInit.networkConfig = vm.cloudInitNetworkConfig ?? '';
 						}}
 					>
 						<span class="icon-[radix-icons--reset] pointer-events-none h-4 w-4"></span>
@@ -80,6 +87,7 @@
 						onclick={() => {
 							cloudInit.data = vm.cloudInitData ?? '';
 							cloudInit.metadata = vm.cloudInitMetaData ?? '';
+							cloudInit.networkConfig = vm.cloudInitNetworkConfig ?? '';
 							open = false;
 						}}
 					>
@@ -103,6 +111,15 @@
 			label={'Metadata'}
 			placeholder="Cloud Init Metadata"
 			bind:value={cloudInit.metadata}
+			classes="flex-1 space-y-1.5"
+			type="textarea"
+			textAreaClasses="h-32"
+		/>
+
+		<CustomValueInput
+			label={'Network Config'}
+			placeholder="Cloud Init Network Config"
+			bind:value={cloudInit.networkConfig}
 			classes="flex-1 space-y-1.5"
 			type="textarea"
 			textAreaClasses="h-32"

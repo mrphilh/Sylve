@@ -4,7 +4,8 @@ import { generateNanoId } from "../string";
 
 export const cloudInitPlaceholders = {
     data: `#cloud-config\nusers:\n  - name: <username>\n    sudo: ALL=(ALL) NOPASSWD:ALL\n    passwd: "$6$c8XPKY..."\n    lock_passwd: false\n    ssh_authorized_keys:\n      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQ...\n\nssh_pwauth: true`,
-    metadata: `instance-id: iid-local01\nlocal-hostname: test`
+    metadata: `instance-id: iid-local01\nlocal-hostname: test`,
+    networkConfig: `# Leave blank for DHCP`,
 };
 
 export function generateTableData(data: CloudInitTemplate[]): { rows: Row[]; columns: Column[] } {
@@ -51,7 +52,7 @@ export function generateTableData(data: CloudInitTemplate[]): { rows: Row[]; col
     }
 }
 
-type TemplateResult = { user: string; meta: string }
+type TemplateResult = { user: string; meta: string; networkConfig: string }
 
 const templates: Record<string, TemplateResult> = {
     simple: {
@@ -91,8 +92,8 @@ final_message: |
 `,
         meta: `instance-id: sylve-vm-${generateNanoId()}
 local-hostname: sylve-simple-vm
-`
-
+`,
+        networkConfig: ``
     },
     docker: {
         user: `#cloud-config
@@ -124,10 +125,11 @@ final_message: |
 `,
         meta: `instance-id: sylve-vm-${generateNanoId()}
 local-hostname: sylve-docker-vm
-`
+`,
+        networkConfig: ``
     }
 }
 
 export function generateTemplate(type: string): TemplateResult {
-    return templates[type] ?? { user: '', meta: '' };
+    return templates[type] ?? { user: '', meta: '', networkConfig: '' };
 }
